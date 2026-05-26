@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>박예찬 | KW Internet Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="home">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-section">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">KW Internet Assignment 2026</p>
+          <h1>박예찬</h1>
+          <p class="hero-line">
+            <span data-typing data-phrases="웹을 배우는 학생입니다.|작은 기능도 끝까지 완성합니다.|사용하기 쉬운 페이지를 만듭니다.">웹을 배우는 학생입니다.</span>
+          </p>
+          <p class="hero-text">
+            인터넷활용 과제를 위한 개인 포트폴리오입니다. HTML, CSS, JavaScript를 사용해
+            소개 페이지와 실습 기능을 직접 만져볼 수 있게 구성했습니다.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="portfolio.html">프로젝트 보기</a>
+            <a class="button ghost" href="dday.html">D-Day 계산하기</a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" aria-label="박예찬 포트폴리오 대표 이미지">
+          <img src="assets/profile-visual.svg" alt="노트북과 프로필 카드가 있는 포트폴리오 일러스트">
+          <div class="mini-status">
+            <strong>Today</strong>
+            <span id="todayLabel">오늘 날짜</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell feature-layout">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Profile</p>
+          <h2>한눈에 보는 박예찬</h2>
+        </div>
+        <div class="stat-grid">
+          <article class="stat-card reveal">
+            <span class="stat-number">01</span>
+            <h3>광운대학교 학생</h3>
+            <p>수업에서 배운 웹 기초를 개인 페이지로 확장해보는 중입니다.</p>
+          </article>
+          <article class="stat-card reveal">
+            <span class="stat-number">02</span>
+            <h3>관심 분야</h3>
+            <p>프론트엔드, 인터랙션, 사용자 경험을 중심으로 공부하고 있습니다.</p>
+          </article>
+          <article class="stat-card reveal">
+            <span class="stat-number">03</span>
+            <h3>목표</h3>
+            <p>단순한 소개 페이지를 넘어 실제로 작동하는 웹 도구를 만드는 것입니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band alt">
+      <div class="shell split-section">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Skills</p>
+          <h2>지금 다루는 기술</h2>
+          <p>과제 페이지 안에서 바로 확인할 수 있도록 기본 웹 기술과 JavaScript 기능을 함께 넣었습니다.</p>
+        </div>
+        <div class="skill-panel reveal">
+          <div class="skill-row" data-level="86">
+            <span>HTML</span>
+            <i></i>
+          </div>
+          <div class="skill-row" data-level="82">
+            <span>CSS</span>
+            <i></i>
+          </div>
+          <div class="skill-row" data-level="76">
+            <span>JavaScript</span>
+            <i></i>
+          </div>
+          <div class="skill-row" data-level="68">
+            <span>UI 구성</span>
+            <i></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Highlights</p>
+          <h2>과제에 추가한 요소</h2>
+        </div>
+        <div class="feature-grid">
+          <a class="feature-card reveal" href="dday.html">
+            <strong>D-Day Keeper</strong>
+            <span>Date 객체로 날짜 차이를 계산하고 저장합니다.</span>
+          </a>
+          <a class="feature-card reveal" href="random.html">
+            <strong>Random Picker</strong>
+            <span>String, Array, Math 객체를 조합해 항목을 뽑습니다.</span>
+          </a>
+          <a class="feature-card reveal" href="portfolio.html">
+            <strong>Project Filter</strong>
+            <span>프로젝트 카드를 주제별로 빠르게 분류합니다.</span>
+          </a>
+          <a class="feature-card reveal" href="contact.html">
+            <strong>Contact Draft</strong>
+            <span>폼 입력값을 검사하고 메시지 초안을 저장합니다.</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="https://github.com/DevChanPark" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

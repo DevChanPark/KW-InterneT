@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D-Day Keeper | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dday">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">Date Object</p>
+        <h1>D-Day Keeper</h1>
+        <p>날짜 차이를 계산하고, 중요한 일정을 브라우저에 저장합니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell tool-grid">
+        <form class="tool-panel reveal" id="ddayForm">
+          <h2>일정 추가</h2>
+          <label for="ddayName">일정 이름</label>
+          <input id="ddayName" name="eventName" type="text" placeholder="예: 기말 발표">
+
+          <label for="ddayDate">목표 날짜</label>
+          <input id="ddayDate" name="eventDate" type="date">
+
+          <div class="quick-row" aria-label="빠른 날짜 선택">
+            <button type="button" data-date-offset="7">+7일</button>
+            <button type="button" data-date-offset="30">+30일</button>
+            <button type="button" data-date-offset="100">+100일</button>
+          </div>
+
+          <button class="button primary" type="submit">계산하고 저장</button>
+          <p class="tool-result" id="ddayResult" role="status"></p>
+        </form>
+
+        <article class="tool-panel reveal">
+          <div class="panel-title">
+            <h2>저장된 일정</h2>
+            <button class="text-button" type="button" id="ddayClear">전체 삭제</button>
+          </div>
+          <ul class="event-list" id="ddayList"></ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">D-Day project</title>
+  <desc id="desc">Calendar cards showing a D-Day counter.</desc>
+  <rect width="640" height="360" fill="#eef7f5"/>
+  <rect x="92" y="54" width="456" height="252" rx="20" fill="#ffffff" stroke="#bdd8d2" stroke-width="3"/>
+  <rect x="92" y="54" width="456" height="64" rx="20" fill="#0f766e"/>
+  <circle cx="172" cy="54" r="16" fill="#d94f30"/>
+  <circle cx="468" cy="54" r="16" fill="#d94f30"/>
+  <text x="320" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="72" font-weight="800" fill="#0f766e">D-30</text>
+  <rect x="184" y="232" width="272" height="20" rx="10" fill="#d6a740"/>
+  <rect x="160" y="270" width="320" height="12" rx="6" fill="#d7e7e3"/>
+</svg>

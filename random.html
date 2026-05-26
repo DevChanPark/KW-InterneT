@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Picker | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="random">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">String · Array · Math</p>
+        <h1>Random Picker</h1>
+        <p>콤마나 줄바꿈으로 항목을 입력하면 JavaScript가 하나를 뽑습니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell tool-grid">
+        <form class="tool-panel reveal" id="randomForm">
+          <h2>항목 입력</h2>
+          <label for="randomItems">뽑을 항목</label>
+          <textarea id="randomItems" rows="9" placeholder="짜장면, 짬뽕, 탕수육"></textarea>
+
+          <div class="button-row">
+            <button class="button primary" type="submit">랜덤 뽑기</button>
+            <button class="button ghost" type="button" id="randomSample">예시 넣기</button>
+          </div>
+        </form>
+
+        <article class="tool-panel reveal">
+          <div class="picker-display" aria-live="polite">
+            <span>Result</span>
+            <strong id="randomResult">아직 뽑지 않았습니다</strong>
+          </div>
+          <div class="panel-title">
+            <h2>최근 결과</h2>
+            <button class="text-button" type="button" id="randomClear">기록 삭제</button>
+          </div>
+          <ol class="history-list" id="randomHistory"></ol>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

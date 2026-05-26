@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Portfolio project</title>
+  <desc id="desc">A website layout thumbnail.</desc>
+  <rect width="640" height="360" fill="#fffaf1"/>
+  <rect x="56" y="44" width="528" height="272" rx="18" fill="#1d2527"/>
+  <rect x="84" y="74" width="472" height="44" rx="10" fill="#0f766e"/>
+  <rect x="84" y="146" width="178" height="132" rx="12" fill="#f0c66a"/>
+  <rect x="292" y="146" width="264" height="22" rx="11" fill="#fffaf1"/>
+  <rect x="292" y="190" width="220" height="18" rx="9" fill="#fffaf1" opacity=".72"/>
+  <rect x="292" y="226" width="248" height="18" rx="9" fill="#fffaf1" opacity=".72"/>
+  <rect x="292" y="262" width="130" height="22" rx="11" fill="#d94f30"/>
+</svg>

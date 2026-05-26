@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="portfolio">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">Portfolio</p>
+        <h1>직접 동작하는 과제 페이지 모음</h1>
+        <p>기본 템플릿에 있던 실습 페이지를 다듬고, 포트폴리오 카드와 필터 기능을 추가했습니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell">
+        <div class="filter-bar reveal" role="group" aria-label="프로젝트 필터">
+          <button class="filter-btn is-active" type="button" data-filter="all">전체</button>
+          <button class="filter-btn" type="button" data-filter="web">웹</button>
+          <button class="filter-btn" type="button" data-filter="js">JavaScript</button>
+          <button class="filter-btn" type="button" data-filter="tool">도구</button>
+        </div>
+
+        <div class="project-grid" aria-live="polite">
+          <article class="project-card reveal" data-project-card data-tags="web js">
+            <img src="assets/project-web.svg" alt="포트폴리오 화면 썸네일">
+            <div class="project-body">
+              <span class="tag-line">HTML · CSS · JS</span>
+              <h2>개인 포트폴리오</h2>
+              <p>박예찬 소개, 기술 스택, 프로젝트 목록을 한 페이지 흐름으로 정리했습니다.</p>
+              <a href="index.html">홈으로 이동</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-project-card data-tags="js tool">
+            <img src="assets/project-dday.svg" alt="달력과 날짜 계산 썸네일">
+            <div class="project-body">
+              <span class="tag-line">Date Object</span>
+              <h2>D-Day Keeper</h2>
+              <p>목표 날짜까지 남은 일수를 계산하고, 여러 일정을 브라우저에 저장합니다.</p>
+              <a href="dday.html">계산기 열기</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-project-card data-tags="js tool">
+            <img src="assets/project-random.svg" alt="랜덤 뽑기 썸네일">
+            <div class="project-body">
+              <span class="tag-line">String · Array · Math</span>
+              <h2>Random Picker</h2>
+              <p>콤마나 줄바꿈으로 입력한 항목 중 하나를 뽑고 최근 결과를 기록합니다.</p>
+              <a href="random.html">뽑기 열기</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-project-card data-tags="web">
+            <img src="assets/project-contact.svg" alt="연락 폼 썸네일">
+            <div class="project-body">
+              <span class="tag-line">Form UX</span>
+              <h2>Contact Draft</h2>
+              <p>메시지 길이 표시, 필수값 검사, 임시 저장으로 기본 폼을 더 자연스럽게 만들었습니다.</p>
+              <a href="contact.html">연락 페이지</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="empty-state" data-empty-projects hidden>해당하는 프로젝트가 없습니다.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="https://github.com/DevChanPark" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="contact">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">Contact</p>
+        <h1>연락과 메시지 초안</h1>
+        <p>폼은 실제 전송 대신 입력값을 검사하고 브라우저에 초안을 저장하는 방식으로 동작합니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell contact-grid">
+        <aside class="contact-panel reveal">
+          <h2>연락 정보</h2>
+          <ul class="contact-list">
+            <li>
+              <span>GitHub</span>
+              <a href="https://github.com/DevChanPark" target="_blank" rel="noreferrer">github.com/DevChanPark</a>
+            </li>
+            <li>
+              <span>Contact</span>
+              <button class="text-button" type="button" data-copy-email data-email="https://github.com/DevChanPark">GitHub 링크 복사</button>
+            </li>
+            <li>
+              <span>Status</span>
+              <strong>웹 과제 개선 중</strong>
+            </li>
+          </ul>
+          <p class="helper-text" data-copy-status>연락 링크를 복사할 수 있습니다.</p>
+        </aside>
+
+        <form class="contact-form reveal" id="contactForm" novalidate>
+          <label for="contactName">이름</label>
+          <input id="contactName" name="name" type="text" autocomplete="name" placeholder="이름을 입력하세요">
+
+          <label for="contactEmail">이메일</label>
+          <input id="contactEmail" name="email" type="email" autocomplete="email" placeholder="email@example.com">
+
+          <label for="contactMessage">메시지</label>
+          <textarea id="contactMessage" name="message" rows="7" maxlength="300" placeholder="메시지를 입력하세요"></textarea>
+          <div class="form-meta">
+            <span data-message-count>0 / 300</span>
+            <button class="text-button" type="button" data-clear-draft>초안 지우기</button>
+          </div>
+
+          <button class="button primary" type="submit">초안 확인</button>
+          <p class="form-result" data-contact-result role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="https://github.com/DevChanPark" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

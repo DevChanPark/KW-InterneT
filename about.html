@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="about">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">About Me</p>
+        <h1>배운 내용을 바로 화면에 옮기는 학생, 박예찬입니다.</h1>
+        <p>
+          웹 페이지가 단순히 정보를 보여주는 것에서 끝나지 않고, 사용자가 직접 눌러보고
+          결과를 확인할 수 있는 작은 프로그램이 되도록 만드는 데 관심이 있습니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell about-grid">
+        <article class="profile-card reveal">
+          <h2>기본 정보</h2>
+          <dl class="info-list">
+            <div>
+              <dt>이름</dt>
+              <dd>박예찬</dd>
+            </div>
+            <div>
+              <dt>소속</dt>
+              <dd>광운대학교</dd>
+            </div>
+            <div>
+              <dt>관심</dt>
+              <dd>프론트엔드, 웹 인터랙션, 문제 해결</dd>
+            </div>
+            <div>
+              <dt>GitHub</dt>
+              <dd><a href="https://github.com/DevChanPark" target="_blank" rel="noreferrer">DevChanPark</a></dd>
+            </div>
+          </dl>
+        </article>
+
+        <article class="profile-card reveal">
+          <h2>학습 방향</h2>
+          <p>
+            HTML로 구조를 만들고, CSS로 보기 좋게 정리하며, JavaScript로 페이지에 움직임과
+            계산 기능을 더하는 과정을 익히고 있습니다.
+          </p>
+          <p>
+            이번 포트폴리오에서는 원본 템플릿을 개인 페이지로 바꾸는 것에서 더 나아가
+            저장 기능, 필터링, 폼 검증, 테마 전환까지 추가했습니다.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-band alt">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Timeline</p>
+          <h2>과제 제작 흐름</h2>
+        </div>
+        <ol class="timeline">
+          <li class="reveal">
+            <span>1</span>
+            <div>
+              <h3>템플릿 분석</h3>
+              <p>Home, About, Portfolio, Contact 구조를 확인하고 필요한 페이지를 유지했습니다.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span>2</span>
+            <div>
+              <h3>개인화</h3>
+              <p>이름, 소개, 기술 스택, 프로젝트 설명을 박예찬 포트폴리오에 맞게 정리했습니다.</p>
+            </div>
+          </li>
+          <li class="reveal">
+            <span>3</span>
+            <div>
+              <h3>기능 확장</h3>
+              <p>D-Day 저장, 랜덤 뽑기 기록, 프로젝트 필터, 문의 폼 검증을 추가했습니다.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="https://github.com/DevChanPark" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
