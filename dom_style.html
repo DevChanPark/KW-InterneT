@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM 스타일 변환기 | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dom-style">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">13주차 실습 3 · DOM Object</p>
+        <h1>DOM 스타일 변환기</h1>
+        <p>버튼을 클릭하면 JavaScript가 DOM 객체를 찾아 글자색, 크기, 배경, 표시 상태를 즉시 바꿉니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell tool-grid">
+        <article class="tool-panel reveal">
+          <h2>변경 대상 문장</h2>
+          <p id="target" class="style-target">이 문장의 스타일을 바꿔보세요!</p>
+          <p class="style-state" id="styleState">현재 상태: 기본 스타일</p>
+        </article>
+
+        <article class="tool-panel reveal">
+          <h2>스타일 제어</h2>
+          <div class="control-grid">
+            <button class="button primary" type="button" onclick="changeColor()">글자색 변경</button>
+            <button class="button ghost" type="button" onclick="changeSize()">크게 보기</button>
+            <button class="button ghost" type="button" onclick="changeBackground()">배경 강조</button>
+            <button class="button ghost" type="button" onclick="toggleVisibility()">숨기기/보이기</button>
+            <button class="button ghost" type="button" onclick="resetDomStyle()">초기화</button>
+          </div>
+          <p class="tool-result" id="domStyleResult" role="status"></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -413,7 +413,7 @@ h3 {
 }
 
 .feature-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .feature-card {
@@ -721,6 +721,192 @@ textarea:focus {
   font-size: 0.92rem;
 }
 
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.style-target {
+  min-height: 86px;
+  padding: 20px;
+  border: 2px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.style-state {
+  padding: 12px;
+  border: 1px dashed var(--line);
+  background: color-mix(in srgb, var(--gold) 12%, var(--surface-strong));
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.comment-list li {
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.comment-list li:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.menu-box {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.menu-item {
+  display: grid;
+  grid-template-columns: auto 1fr 82px;
+  gap: 12px;
+  align-items: center;
+  margin: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.menu-item input[type="checkbox"] {
+  width: 20px;
+  min-height: 20px;
+}
+
+.menu-item small {
+  display: block;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.menu-qty {
+  width: 82px;
+  min-width: 0;
+  text-align: center;
+}
+
+.order-total {
+  color: var(--primary);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.receipt-list li {
+  grid-template-columns: 1fr;
+}
+
+.car-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.car-stage {
+  position: relative;
+  min-height: 460px;
+  overflow: hidden;
+  border: 5px solid #d72f2f;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--line) 45%, transparent) 1px, transparent 1px),
+    var(--surface-strong);
+  background-size: 44px 44px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  outline: none;
+}
+
+#car {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  display: grid;
+  width: 92px;
+  height: 46px;
+  place-items: center;
+  background: var(--violet);
+  color: #ffffff;
+  border: 3px solid color-mix(in srgb, var(--violet) 70%, #000000);
+  border-radius: 8px 18px 8px 8px;
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+#car::before,
+#car::after {
+  position: absolute;
+  bottom: -10px;
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--surface-strong);
+  background: #1d2527;
+  border-radius: 50%;
+  content: "";
+}
+
+#car::before {
+  left: 12px;
+}
+
+#car::after {
+  right: 12px;
+}
+
+.direction-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 54px);
+  grid-template-areas:
+    ". up ."
+    "left down right";
+  gap: 8px;
+  margin: 20px 0 4px;
+}
+
+.direction-pad button {
+  display: inline-grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--primary);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.direction-pad button:hover {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 13%, transparent);
+}
+
+.direction-pad [data-car-move="up"] {
+  grid-area: up;
+}
+
+.direction-pad [data-car-move="left"] {
+  grid-area: left;
+}
+
+.direction-pad [data-car-move="down"] {
+  grid-area: down;
+}
+
+.direction-pad [data-car-move="right"] {
+  grid-area: right;
+}
+
 .back-top {
   position: fixed;
   right: 18px;
@@ -785,7 +971,8 @@ textarea:focus {
   .split-section,
   .about-grid,
   .contact-grid,
-  .tool-grid {
+  .tool-grid,
+  .car-layout {
     grid-template-columns: 1fr;
   }
 
@@ -831,8 +1018,17 @@ textarea:focus {
   .info-list div,
   .timeline li,
   .event-list li,
-  .history-list li {
+  .history-list li,
+  .menu-item {
     grid-template-columns: 1fr;
+  }
+
+  .control-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .car-stage {
+    min-height: 340px;
   }
 
   .footer-inner {

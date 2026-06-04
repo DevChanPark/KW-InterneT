@@ -400,6 +400,392 @@
     renderHistory();
   }
 
+  function setDomStyleStatus(message) {
+    var result = $("#domStyleResult");
+    var state = $("#styleState");
+    if (result) {
+      result.textContent = message;
+    }
+    if (state) {
+      state.textContent = "현재 상태: " + message;
+    }
+  }
+
+  window.changeColor = function () {
+    var obj = document.getElementById("target");
+    if (!obj) {
+      return;
+    }
+    obj.style.color = "red";
+    setDomStyleStatus("글자색을 빨강으로 변경했습니다.");
+  };
+
+  window.changeSize = function () {
+    var obj = document.getElementById("target");
+    if (!obj) {
+      return;
+    }
+    obj.style.fontSize = "32px";
+    setDomStyleStatus("글자 크기를 32px로 변경했습니다.");
+  };
+
+  window.changeBackground = function () {
+    var obj = document.getElementById("target");
+    if (!obj) {
+      return;
+    }
+    obj.style.backgroundColor = "yellow";
+    setDomStyleStatus("배경색을 노랑으로 강조했습니다.");
+  };
+
+  window.toggleVisibility = function () {
+    var obj = document.getElementById("target");
+    if (!obj) {
+      return;
+    }
+    if (obj.style.display === "none") {
+      obj.style.display = "block";
+      setDomStyleStatus("문장을 다시 보이게 했습니다.");
+    } else {
+      obj.style.display = "none";
+      setDomStyleStatus("문장을 숨겼습니다.");
+    }
+  };
+
+  window.resetDomStyle = function () {
+    var obj = document.getElementById("target");
+    if (!obj) {
+      return;
+    }
+    obj.removeAttribute("style");
+    setDomStyleStatus("기본 스타일로 초기화했습니다.");
+  };
+
+  function initDomStyle() {
+    if (!$("#target")) {
+      return;
+    }
+    setDomStyleStatus("기본 스타일");
+  }
+
+  function initDomList() {
+    var list = $("#commentList");
+    if (!list) {
+      return;
+    }
+    var form = $("#domCommentForm");
+    var input = $("#commentInput");
+    var promptButton = $("#commentPrompt");
+    var clear = $("#commentClear");
+    var status = $("#commentStatus");
+    var key = "yechan-dom-comments";
+    var savedComments = storage.get(key, []);
+
+    function saveComments() {
+      var values = $$("#commentList li strong").map(function (item) {
+        return item.textContent;
+      }).filter(function (value) {
+        return value !== "댓글이 없습니다";
+      });
+      storage.set(key, values);
+    }
+
+    function addComment(value, shouldSave) {
+      var text = String(value || "").trim();
+      if (!text) {
+        if (status) {
+          status.textContent = "댓글 내용을 입력해주세요.";
+        }
+        return;
+      }
+      var newLi = document.createElement("li");
+      newLi.innerHTML = "<div><strong>" + escapeHTML(text) + "</strong><small>클릭하면 삭제됩니다.</small></div>";
+      newLi.onclick = function () {
+        var p = this.parentElement;
+        p.removeChild(this);
+        saveComments();
+        if (!p.children.length) {
+          p.innerHTML = "<li><div><strong>댓글이 없습니다</strong><small>새 댓글을 추가해보세요.</small></div></li>";
+        }
+        if (status) {
+          status.textContent = "선택한 댓글을 삭제했습니다.";
+        }
+      };
+      list.appendChild(newLi);
+      if (shouldSave) {
+        saveComments();
+      }
+      if (status) {
+        status.textContent = "댓글을 추가했습니다.";
+      }
+    }
+
+    if (savedComments.length) {
+      savedComments.forEach(function (comment) {
+        addComment(comment, false);
+      });
+    } else {
+      list.innerHTML = "<li><div><strong>댓글이 없습니다</strong><small>새 댓글을 추가해보세요.</small></div></li>";
+    }
+
+    function ensureRealList() {
+      var empty = $("#commentList li strong");
+      if (empty && empty.textContent === "댓글이 없습니다") {
+        list.innerHTML = "";
+      }
+    }
+
+    function addFromPrompt() {
+      var inputStr = null;
+      try {
+        inputStr = prompt("댓글 내용을 입력하세요.");
+      } catch (error) {
+        if (status) {
+          status.textContent = "이 브라우저에서는 prompt가 막혀 있어 입력 칸으로 댓글을 추가합니다.";
+        }
+        if (input) {
+          input.focus();
+        }
+        return;
+      }
+      if (inputStr !== null && inputStr.trim()) {
+        ensureRealList();
+        addComment(inputStr, true);
+      }
+    }
+
+    if (!savedComments.length) {
+      addFromPrompt();
+    }
+
+    if (form) {
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        ensureRealList();
+        addComment(input.value, true);
+        input.value = "";
+      });
+    }
+
+    if (promptButton) {
+      promptButton.addEventListener("click", addFromPrompt);
+    }
+
+    if (clear) {
+      clear.addEventListener("click", function () {
+        list.innerHTML = "<li><div><strong>댓글이 없습니다</strong><small>새 댓글을 추가해보세요.</small></div></li>";
+        storage.set(key, []);
+        if (status) {
+          status.textContent = "댓글을 모두 삭제했습니다.";
+        }
+      });
+    }
+  }
+
+  function formatWon(value) {
+    return Number(value || 0).toLocaleString("ko-KR") + "원";
+  }
+
+  function getOrderItems() {
+    var checks = document.getElementsByClassName("menu-check");
+    var qtys = document.getElementsByClassName("menu-qty");
+    var items = [];
+    for (var i = 0; i < checks.length; i += 1) {
+      if (checks[i].checked) {
+        var price = parseInt(checks[i].value, 10);
+        var quantity = parseInt(qtys[i].value, 10) || 1;
+        var name = checks[i].closest(".menu-item").querySelector("strong").textContent;
+        items.push({
+          name: name,
+          price: price,
+          quantity: quantity,
+          subtotal: price * quantity
+        });
+      }
+    }
+    return items;
+  }
+
+  window.recalc = function () {
+    var total = 0;
+    var checks = document.getElementsByClassName("menu-check");
+    var qtys = document.getElementsByClassName("menu-qty");
+    var totalInput = document.getElementById("total");
+    var result = document.getElementById("orderResult");
+    for (var i = 0; i < checks.length; i += 1) {
+      if (checks[i].checked) {
+        var price = parseInt(checks[i].value, 10);
+        var quantity = parseInt(qtys[i].value, 10) || 1;
+        total += price * quantity;
+      }
+    }
+    if (totalInput) {
+      totalInput.value = total;
+    }
+    if (result) {
+      result.textContent = "현재 총액: " + formatWon(total);
+    }
+    return total;
+  };
+
+  window.validateAddress = function () {
+    var address = document.getElementById("address");
+    var result = document.getElementById("orderResult");
+    if (!address || address.value.trim()) {
+      return true;
+    }
+    if (result) {
+      result.textContent = "배달 주소를 입력해주세요.";
+    }
+    alert("배달 주소를 입력해주세요.");
+    setTimeout(function () {
+      address.focus();
+    }, 0);
+    return false;
+  };
+
+  window.validate = function (e) {
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+    var total = window.recalc();
+    var result = document.getElementById("orderResult");
+    var receipt = document.getElementById("orderReceipt");
+    var address = document.getElementById("address");
+    if (total === 0) {
+      alert("메뉴를 선택해주세요.");
+      if (result) {
+        result.textContent = "메뉴를 하나 이상 선택해야 주문할 수 있습니다.";
+      }
+      return false;
+    }
+    if (address && !address.value.trim()) {
+      window.validateAddress();
+      return false;
+    }
+    var items = getOrderItems();
+    if (receipt) {
+      receipt.innerHTML = [
+        "<li>",
+        "<div>",
+        "<strong>총액: " + formatWon(total) + "</strong>",
+        "<small>" + escapeHTML(items.map(function (item) {
+          return item.name + " " + item.quantity + "개";
+        }).join(", ")) + "</small>",
+        "</div>",
+        "</li>"
+      ].join("");
+    }
+    alert("주문 완료! 총액: " + formatWon(total));
+    if (result) {
+      result.textContent = "주문 완료! 총액은 " + formatWon(total) + "입니다.";
+    }
+    return false;
+  };
+
+  function initEventOrder() {
+    if (!$("#orderForm")) {
+      return;
+    }
+    var receipt = $("#orderReceipt");
+    $$(".menu-check, .menu-qty").forEach(function (field) {
+      field.addEventListener("input", window.recalc);
+      field.addEventListener("change", window.recalc);
+    });
+    if (receipt) {
+      receipt.innerHTML = "<li><div><strong>주문 내역이 없습니다</strong><small>메뉴를 선택하고 주문하기를 눌러보세요.</small></div></li>";
+    }
+    window.recalc();
+  }
+
+  function initEventCar() {
+    var car = document.getElementById("car");
+    var stage = document.getElementById("carStage");
+    if (!car || !stage) {
+      return;
+    }
+    var x = 100;
+    var y = 100;
+    var step = 10;
+    var borderWidth = 5;
+    var status = document.getElementById("carStatus");
+
+    function render(message) {
+      car.style.left = x + "px";
+      car.style.top = y + "px";
+      if (status) {
+        status.textContent = (message || "이동 준비 완료") + " · 현재 좌표 (" + x + ", " + y + ") · 이동 거리 " + step + "px";
+      }
+    }
+
+    function move(dx, dy) {
+      var maxX = stage.clientWidth - car.offsetWidth - borderWidth;
+      var maxY = stage.clientHeight - car.offsetHeight - borderWidth;
+      var nextX = Math.max(borderWidth, Math.min(maxX, x + dx));
+      var nextY = Math.max(borderWidth, Math.min(maxY, y + dy));
+      var blocked = nextX !== x + dx || nextY !== y + dy;
+      x = nextX;
+      y = nextY;
+      render(blocked ? "경계에 닿았습니다" : "자동차를 이동했습니다");
+    }
+
+    window.onkeydown = function (e) {
+      var keyCode = e.keyCode;
+      switch (keyCode) {
+        case 37:
+          e.preventDefault();
+          move(-step, 0);
+          break;
+        case 38:
+          e.preventDefault();
+          move(0, -step);
+          break;
+        case 39:
+          e.preventDefault();
+          move(step, 0);
+          break;
+        case 40:
+          e.preventDefault();
+          move(0, step);
+          break;
+      }
+    };
+
+    $$("#carControls button").forEach(function (button) {
+      button.addEventListener("click", function () {
+        var direction = button.dataset.carMove;
+        if (direction === "left") {
+          move(-step, 0);
+        } else if (direction === "right") {
+          move(step, 0);
+        } else if (direction === "up") {
+          move(0, -step);
+        } else if (direction === "down") {
+          move(0, step);
+        }
+      });
+    });
+
+    $("#carFaster") && $("#carFaster").addEventListener("click", function () {
+      step = Math.min(40, step + 5);
+      render("이동 속도를 올렸습니다");
+    });
+
+    $("#carSlower") && $("#carSlower").addEventListener("click", function () {
+      step = Math.max(5, step - 5);
+      render("이동 속도를 낮췄습니다");
+    });
+
+    $("#carReset") && $("#carReset").addEventListener("click", function () {
+      x = 100;
+      y = 100;
+      step = 10;
+      render("자동차 위치를 초기화했습니다");
+    });
+
+    render();
+  }
+
   function initContact() {
     var form = $("#contactForm");
     if (!form) {
@@ -485,5 +871,9 @@
   initProjectFilter();
   initDday();
   initRandomPicker();
+  initDomStyle();
+  initDomList();
+  initEventOrder();
+  initEventCar();
   initContact();
 })();

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>키보드 자동차 | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="event-car">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">15주차 실습 6 · Keyboard Event</p>
+        <h1>키보드 자동차</h1>
+        <p>방향키의 keyCode를 감지해 자동차 위치를 바꾸고, 빨간 경계 밖으로 나가지 않게 막습니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell car-layout">
+        <div class="car-stage reveal" id="carStage" tabindex="0" aria-label="자동차 이동 영역">
+          <div id="car" aria-label="자동차">CAR</div>
+        </div>
+
+        <aside class="tool-panel reveal">
+          <h2>조작 패널</h2>
+          <p class="helper-text">키보드 방향키 또는 아래 버튼으로 자동차를 움직일 수 있습니다.</p>
+          <div class="direction-pad" id="carControls" aria-label="자동차 이동 버튼">
+            <button type="button" data-car-move="up">↑</button>
+            <button type="button" data-car-move="left">←</button>
+            <button type="button" data-car-move="down">↓</button>
+            <button type="button" data-car-move="right">→</button>
+          </div>
+          <div class="button-row">
+            <button class="button ghost" type="button" id="carSlower">느리게</button>
+            <button class="button ghost" type="button" id="carFaster">빠르게</button>
+            <button class="button primary" type="button" id="carReset">리셋</button>
+          </div>
+          <p class="tool-result" id="carStatus" role="status"></p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

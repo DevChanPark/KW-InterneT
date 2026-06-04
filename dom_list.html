@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>댓글 추가/삭제 | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dom-list">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">13주차 실습 4 · Dynamic DOM</p>
+        <h1>댓글 추가/삭제 프로그램</h1>
+        <p>입력한 댓글을 리스트에 동적으로 추가하고, 댓글을 클릭하면 해당 요소를 삭제합니다.</p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell tool-grid">
+        <form class="tool-panel reveal" id="domCommentForm">
+          <h2>댓글 입력</h2>
+          <label for="commentInput">새 댓글</label>
+          <input id="commentInput" type="text" placeholder="댓글을 입력하세요">
+          <div class="button-row">
+            <button class="button primary" type="submit">댓글 추가</button>
+            <button class="button ghost" type="button" id="commentPrompt">prompt로 추가</button>
+          </div>
+          <p class="tool-result" id="commentStatus" role="status"></p>
+        </form>
+
+        <article class="tool-panel reveal">
+          <div class="panel-title">
+            <h2>댓글 목록</h2>
+            <button class="text-button" type="button" id="commentClear">전체 삭제</button>
+          </div>
+          <p class="helper-text">댓글을 클릭하면 createElement로 만든 li가 removeChild로 삭제됩니다.</p>
+          <ul class="event-list comment-list" id="commentList"></ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>
