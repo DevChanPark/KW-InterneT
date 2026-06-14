@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | 박예찬</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dashboard">
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <header class="site-header">
+    <div class="shell nav-shell">
+      <a class="brand" href="index.html" aria-label="박예찬 홈">
+        <span class="brand-mark">YC</span>
+        <span>박예찬</span>
+      </a>
+      <nav class="site-nav" aria-label="주요 메뉴">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
+        <span data-theme-icon>☾</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="shell narrow reveal">
+        <p class="eyebrow">Final Project Dashboard</p>
+        <h1>실습 진행률과 제출 준비를 한 번에 관리합니다.</h1>
+        <p>
+          각 실습 페이지 방문 기록, 완료 체크, 즐겨찾기, 제출 체크리스트, 자기평가 퀴즈,
+          개인 메모를 브라우저에 저장합니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="section-band">
+      <div class="shell dashboard-grid" id="dashboardRoot">
+        <article class="dashboard-card dashboard-summary reveal">
+          <div class="panel-title">
+            <h2>프로젝트 현황</h2>
+            <button class="text-button" type="button" id="dashboardReset">기록 초기화</button>
+          </div>
+          <div class="progress-dial" id="progressDial" style="--progress: 0%">
+            <strong id="progressPercent">0%</strong>
+            <span>완료율</span>
+          </div>
+          <div class="metric-grid">
+            <div>
+              <strong id="doneCount">0</strong>
+              <span>완료 실습</span>
+            </div>
+            <div>
+              <strong id="visitedCount">0</strong>
+              <span>방문 실습</span>
+            </div>
+            <div>
+              <strong id="favoriteCount">0</strong>
+              <span>즐겨찾기</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dashboard-card reveal">
+          <div class="panel-title">
+            <h2>실습 진행 현황</h2>
+            <button class="text-button" type="button" id="markAllDone">전체 완료</button>
+          </div>
+          <div class="practice-track" id="practiceTrack"></div>
+        </article>
+
+        <article class="dashboard-card reveal">
+          <h2>즐겨찾기</h2>
+          <p class="helper-text">자주 확인할 실습을 별표로 표시하면 여기에서 빠르게 이동할 수 있습니다.</p>
+          <div class="quick-link-list" id="favoriteList"></div>
+        </article>
+
+        <article class="dashboard-card reveal">
+          <h2>최근 방문</h2>
+          <p class="helper-text">이 브라우저에서 열어본 페이지 기준으로 자동 기록됩니다.</p>
+          <div class="quick-link-list" id="recentList"></div>
+        </article>
+
+        <article class="dashboard-card reveal">
+          <h2>제출 체크리스트</h2>
+          <div class="checklist" id="submitChecklist">
+            <label><input type="checkbox" value="pages"> 모든 페이지 링크 확인</label>
+            <label><input type="checkbox" value="mobile"> 모바일 화면 확인</label>
+            <label><input type="checkbox" value="features"> 추가 기능 직접 시연</label>
+            <label><input type="checkbox" value="github"> GitHub Pages 배포 링크 확인</label>
+            <label><input type="checkbox" value="readme"> README 설명 확인</label>
+          </div>
+          <p class="tool-result" id="checklistStatus" role="status"></p>
+        </article>
+
+        <article class="dashboard-card reveal">
+          <h2>자기평가 퀴즈</h2>
+          <form class="quiz-form" id="quizForm">
+            <fieldset>
+              <legend>1. DOM 요소를 찾는 대표 메서드는?</legend>
+              <label><input type="radio" name="q1" value="a"> document.getElementById()</label>
+              <label><input type="radio" name="q1" value="b"> window.alert()</label>
+            </fieldset>
+            <fieldset>
+              <legend>2. 날짜 차이 계산에 사용한 객체는?</legend>
+              <label><input type="radio" name="q2" value="a"> Date</label>
+              <label><input type="radio" name="q2" value="b"> Screen</label>
+            </fieldset>
+            <fieldset>
+              <legend>3. 입력값을 저장한 브라우저 기능은?</legend>
+              <label><input type="radio" name="q3" value="a"> localStorage</label>
+              <label><input type="radio" name="q3" value="b"> canvas</label>
+            </fieldset>
+            <button class="button primary" type="submit">점수 확인</button>
+          </form>
+          <p class="tool-result" id="quizResult" role="status"></p>
+        </article>
+
+        <article class="dashboard-card dashboard-notes reveal">
+          <div class="panel-title">
+            <h2>프로젝트 메모</h2>
+            <button class="text-button" type="button" id="clearDashboardMemo">메모 삭제</button>
+          </div>
+          <textarea id="dashboardMemo" rows="9" maxlength="500" placeholder="발표할 때 말할 내용이나 보완할 점을 적어두세요."></textarea>
+          <div class="form-meta">
+            <span id="memoCount">0 / 500</span>
+            <span>자동 저장</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <small>&copy; <span id="year"></span> 박예찬</small>
+      <a href="portfolio.html">Portfolio</a>
+    </div>
+  </footer>
+
+  <button class="back-top" type="button" data-back-top aria-label="맨 위로 이동">↑</button>
+  <script src="script.js"></script>
+</body>
+</html>

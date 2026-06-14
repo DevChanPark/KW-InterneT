@@ -346,6 +346,7 @@ h3 {
 .profile-card,
 .tool-panel,
 .contact-panel,
+.dashboard-card,
 .project-card {
   border: 1px solid var(--line);
   background: var(--surface-strong);
@@ -372,7 +373,8 @@ h3 {
 .profile-card p,
 .project-card p,
 .tool-panel p,
-.contact-panel p {
+.contact-panel p,
+.dashboard-card p {
   color: var(--muted);
 }
 
@@ -721,6 +723,182 @@ textarea:focus {
   font-size: 0.92rem;
 }
 
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.dashboard-card {
+  padding: 24px;
+}
+
+.dashboard-notes {
+  grid-column: 1 / -1;
+}
+
+.dashboard-summary {
+  display: grid;
+  gap: 22px;
+}
+
+.progress-dial {
+  display: grid;
+  width: min(230px, 100%);
+  aspect-ratio: 1;
+  place-items: center;
+  justify-self: center;
+  background:
+    radial-gradient(circle, var(--surface-strong) 57%, transparent 58%),
+    conic-gradient(var(--primary) var(--progress), color-mix(in srgb, var(--line) 70%, transparent) 0);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.progress-dial strong {
+  display: block;
+  color: var(--primary);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1;
+}
+
+.progress-dial span {
+  color: var(--muted);
+  font-weight: 900;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric-grid div {
+  display: grid;
+  gap: 4px;
+  min-height: 84px;
+  place-items: center;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.metric-grid strong {
+  color: var(--primary);
+  font-size: 1.45rem;
+}
+
+.metric-grid span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.practice-track,
+.quick-link-list,
+.checklist,
+.quiz-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.practice-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.practice-row.is-done {
+  border-color: color-mix(in srgb, var(--primary) 65%, var(--line));
+  background: color-mix(in srgb, var(--primary) 9%, var(--surface));
+}
+
+.practice-row label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 0;
+}
+
+.practice-row input[type="checkbox"],
+.checklist input[type="checkbox"],
+.quiz-form input[type="radio"] {
+  width: 20px;
+  min-height: 20px;
+}
+
+.practice-row strong,
+.quick-link-list strong {
+  display: block;
+}
+
+.practice-row small,
+.quick-link-list span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.practice-actions a,
+.quick-link-list a {
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.quick-link-list a {
+  display: block;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.quick-link-list a:hover {
+  border-color: var(--primary);
+}
+
+.checklist label,
+.quiz-form label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.quiz-form fieldset {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.quiz-form legend {
+  padding: 0 6px;
+  font-weight: 900;
+}
+
 .control-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -971,6 +1149,7 @@ textarea:focus {
   .split-section,
   .about-grid,
   .contact-grid,
+  .dashboard-grid,
   .tool-grid,
   .car-layout {
     grid-template-columns: 1fr;
@@ -1019,8 +1198,17 @@ textarea:focus {
   .timeline li,
   .event-list li,
   .history-list li,
-  .menu-item {
+  .menu-item,
+  .practice-row {
     grid-template-columns: 1fr;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .practice-actions {
+    justify-content: flex-start;
   }
 
   .control-grid {

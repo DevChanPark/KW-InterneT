@@ -74,6 +74,63 @@
     return "D+" + Math.abs(diff);
   }
 
+  var practicePages = [
+    { id: "dday", href: "dday.html", title: "D-Day Keeper", detail: "Date 객체로 날짜 차이 계산" },
+    { id: "random", href: "random.html", title: "Random Picker", detail: "String, Array, Math 객체 활용" },
+    { id: "dom-style", href: "dom_style.html", title: "DOM 스타일 변환기", detail: "DOM style 프로퍼티 변경" },
+    { id: "dom-list", href: "dom_list.html", title: "댓글 추가/삭제", detail: "createElement와 removeChild" },
+    { id: "event-order", href: "event_order.html", title: "스마트 피자 주문서", detail: "폼 이벤트와 총액 계산" },
+    { id: "event-car", href: "event_car.html", title: "키보드 자동차", detail: "키보드 이벤트와 경계 체크" }
+  ];
+
+  var pageTitles = {
+    "index.html": "Home",
+    "about.html": "About",
+    "portfolio.html": "Portfolio",
+    "dashboard.html": "Dashboard",
+    "contact.html": "Contact",
+    "dday.html": "D-Day Keeper",
+    "random.html": "Random Picker",
+    "dom_style.html": "DOM 스타일 변환기",
+    "dom_list.html": "댓글 추가/삭제",
+    "event_order.html": "스마트 피자 주문서",
+    "event_car.html": "키보드 자동차"
+  };
+
+  function formatTimeAgo(isoString) {
+    if (!isoString) {
+      return "방문 기록 없음";
+    }
+    var diff = Date.now() - new Date(isoString).getTime();
+    var minute = 60000;
+    var hour = minute * 60;
+    var day = hour * 24;
+    if (diff < minute) {
+      return "방금 전";
+    }
+    if (diff < hour) {
+      return Math.floor(diff / minute) + "분 전";
+    }
+    if (diff < day) {
+      return Math.floor(diff / hour) + "시간 전";
+    }
+    return new Date(isoString).toLocaleDateString("ko-KR");
+  }
+
+  function trackPageVisit(current) {
+    if (!current) {
+      return;
+    }
+    var visits = storage.get("yechan-page-visits", {});
+    var previous = visits[current] || {};
+    visits[current] = {
+      count: (previous.count || 0) + 1,
+      last: new Date().toISOString(),
+      title: pageTitles[current] || current
+    };
+    storage.set("yechan-page-visits", visits);
+  }
+
   function initCommon() {
     var year = $("#year");
     var now = new Date();
@@ -93,6 +150,7 @@
         link.setAttribute("aria-current", "page");
       }
     });
+    trackPageVisit(current);
 
     var savedTheme = storage.get("yechan-theme", null);
     if (savedTheme) {
@@ -321,6 +379,240 @@
     });
 
     render();
+  }
+
+  function initDashboard() {
+    var dashboard = $("#dashboardRoot");
+    if (!dashboard) {
+      return;
+    }
+
+    var doneKey = "yechan-dashboard-done";
+    var favoriteKey = "yechan-dashboard-favorites";
+    var checklistKey = "yechan-dashboard-checklist";
+    var memoKey = "yechan-dashboard-memo";
+    var quizKey = "yechan-dashboard-quiz";
+    var done = storage.get(doneKey, {});
+    var favorites = storage.get(favoriteKey, {});
+    var checklist = storage.get(checklistKey, {});
+
+    var progressDial = $("#progressDial");
+    var progressPercent = $("#progressPercent");
+    var doneCount = $("#doneCount");
+    var visitedCount = $("#visitedCount");
+    var favoriteCount = $("#favoriteCount");
+    var practiceTrack = $("#practiceTrack");
+    var favoriteList = $("#favoriteList");
+    var recentList = $("#recentList");
+    var checklistBox = $("#submitChecklist");
+    var checklistStatus = $("#checklistStatus");
+    var memo = $("#dashboardMemo");
+    var memoCount = $("#memoCount");
+    var quizForm = $("#quizForm");
+    var quizResult = $("#quizResult");
+
+    function saveDone() {
+      storage.set(doneKey, done);
+    }
+
+    function saveFavorites() {
+      storage.set(favoriteKey, favorites);
+    }
+
+    function renderPracticeRows() {
+      var visits = storage.get("yechan-page-visits", {});
+      practiceTrack.innerHTML = practicePages.map(function (item) {
+        var checked = done[item.id] ? " checked" : "";
+        var favorite = favorites[item.id];
+        var visit = visits[item.href];
+        return [
+          '<div class="practice-row' + (done[item.id] ? " is-done" : "") + '">',
+          '<label>',
+          '<input type="checkbox" data-practice-toggle="' + item.id + '"' + checked + ">",
+          "<span>",
+          "<strong>" + escapeHTML(item.title) + "</strong>",
+          "<small>" + escapeHTML(item.detail) + " · " + formatTimeAgo(visit && visit.last) + "</small>",
+          "</span>",
+          "</label>",
+          '<div class="practice-actions">',
+          '<button class="text-button" type="button" data-favorite-toggle="' + item.id + '">' + (favorite ? "즐겨찾기 해제" : "즐겨찾기") + "</button>",
+          '<a href="' + item.href + '">열기</a>',
+          "</div>",
+          "</div>"
+        ].join("");
+      }).join("");
+    }
+
+    function renderFavorites() {
+      var selected = practicePages.filter(function (item) {
+        return favorites[item.id];
+      });
+      if (!selected.length) {
+        favoriteList.innerHTML = '<p class="empty-state">즐겨찾기한 실습이 없습니다.</p>';
+        return;
+      }
+      favoriteList.innerHTML = selected.map(function (item) {
+        return '<a href="' + item.href + '"><strong>' + escapeHTML(item.title) + '</strong><span>' + escapeHTML(item.detail) + "</span></a>";
+      }).join("");
+    }
+
+    function renderRecent() {
+      var visits = storage.get("yechan-page-visits", {});
+      var entries = Object.keys(visits).map(function (href) {
+        return {
+          href: href,
+          title: visits[href].title || pageTitles[href] || href,
+          last: visits[href].last,
+          count: visits[href].count || 0
+        };
+      }).sort(function (a, b) {
+        return new Date(b.last) - new Date(a.last);
+      }).slice(0, 6);
+
+      if (!entries.length) {
+        recentList.innerHTML = '<p class="empty-state">아직 방문 기록이 없습니다.</p>';
+        return;
+      }
+      recentList.innerHTML = entries.map(function (item) {
+        return '<a href="' + item.href + '"><strong>' + escapeHTML(item.title) + '</strong><span>' + formatTimeAgo(item.last) + " · " + item.count + "회 방문</span></a>";
+      }).join("");
+    }
+
+    function renderSummary() {
+      var visits = storage.get("yechan-page-visits", {});
+      var complete = practicePages.filter(function (item) {
+        return done[item.id];
+      }).length;
+      var visited = practicePages.filter(function (item) {
+        return visits[item.href];
+      }).length;
+      var favoriteTotal = practicePages.filter(function (item) {
+        return favorites[item.id];
+      }).length;
+      var percent = Math.round((complete / practicePages.length) * 100);
+      progressDial.style.setProperty("--progress", percent + "%");
+      progressPercent.textContent = percent + "%";
+      doneCount.textContent = complete + "/" + practicePages.length;
+      visitedCount.textContent = visited + "/" + practicePages.length;
+      favoriteCount.textContent = favoriteTotal;
+    }
+
+    function renderChecklist() {
+      var inputs = $$("input[type='checkbox']", checklistBox);
+      var checkedCount = 0;
+      inputs.forEach(function (input) {
+        input.checked = Boolean(checklist[input.value]);
+        if (input.checked) {
+          checkedCount += 1;
+        }
+      });
+      checklistStatus.textContent = "제출 준비 " + checkedCount + "/" + inputs.length + " 완료";
+    }
+
+    function renderAll() {
+      renderSummary();
+      renderPracticeRows();
+      renderFavorites();
+      renderRecent();
+      renderChecklist();
+    }
+
+    practiceTrack.addEventListener("change", function (event) {
+      if (!event.target.matches("[data-practice-toggle]")) {
+        return;
+      }
+      done[event.target.dataset.practiceToggle] = event.target.checked;
+      saveDone();
+      renderAll();
+    });
+
+    practiceTrack.addEventListener("click", function (event) {
+      if (!event.target.matches("[data-favorite-toggle]")) {
+        return;
+      }
+      var id = event.target.dataset.favoriteToggle;
+      favorites[id] = !favorites[id];
+      if (!favorites[id]) {
+        delete favorites[id];
+      }
+      saveFavorites();
+      renderAll();
+    });
+
+    $("#markAllDone").addEventListener("click", function () {
+      practicePages.forEach(function (item) {
+        done[item.id] = true;
+      });
+      saveDone();
+      renderAll();
+    });
+
+    $("#dashboardReset").addEventListener("click", function () {
+      if (!confirm("대시보드 기록을 초기화할까요?")) {
+        return;
+      }
+      done = {};
+      favorites = {};
+      checklist = {};
+      storage.remove(doneKey);
+      storage.remove(favoriteKey);
+      storage.remove(checklistKey);
+      storage.remove(memoKey);
+      storage.remove(quizKey);
+      memo.value = "";
+      updateMemoCount();
+      quizResult.textContent = "";
+      renderAll();
+    });
+
+    checklistBox.addEventListener("change", function (event) {
+      if (!event.target.matches("input[type='checkbox']")) {
+        return;
+      }
+      checklist[event.target.value] = event.target.checked;
+      if (!event.target.checked) {
+        delete checklist[event.target.value];
+      }
+      storage.set(checklistKey, checklist);
+      renderChecklist();
+    });
+
+    function updateMemoCount() {
+      memoCount.textContent = memo.value.length + " / 500";
+    }
+
+    memo.value = storage.get(memoKey, "");
+    memo.addEventListener("input", function () {
+      storage.set(memoKey, memo.value);
+      updateMemoCount();
+    });
+    $("#clearDashboardMemo").addEventListener("click", function () {
+      memo.value = "";
+      storage.remove(memoKey);
+      updateMemoCount();
+    });
+    updateMemoCount();
+
+    var savedQuiz = storage.get(quizKey, null);
+    if (savedQuiz) {
+      quizResult.textContent = "최근 점수: " + savedQuiz.score + "/3점";
+    }
+
+    quizForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var answers = { q1: "a", q2: "a", q3: "a" };
+      var score = Object.keys(answers).reduce(function (total, name) {
+        var selected = quizForm.querySelector("input[name='" + name + "']:checked");
+        return total + (selected && selected.value === answers[name] ? 1 : 0);
+      }, 0);
+      storage.set(quizKey, {
+        score: score,
+        savedAt: new Date().toISOString()
+      });
+      quizResult.textContent = "점수: " + score + "/3점 · " + (score === 3 ? "핵심 개념을 잘 이해했습니다." : "틀린 문항을 다시 확인해보세요.");
+    });
+
+    renderAll();
   }
 
   function initRandomPicker() {
@@ -870,6 +1162,7 @@
   initCommon();
   initProjectFilter();
   initDday();
+  initDashboard();
   initRandomPicker();
   initDomStyle();
   initDomList();
