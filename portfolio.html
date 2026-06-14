@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="박예찬의 KW Internet 기말 프로젝트 포트폴리오입니다. 6개 실습, 대시보드, 검색, 발표 모드가 포함되어 있습니다.">
+  <meta property="og:title" content="박예찬 KW Internet Final Project">
+  <meta property="og:description" content="실습 진행률, 사이트 검색, 발표 모드, 저장 기능을 갖춘 박예찬의 웹 포트폴리오입니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://devchanpark.github.io/KW-InterneT/">
+  <meta property="og:image" content="https://devchanpark.github.io/KW-InterneT/assets/profile-visual.svg">
   <title>Portfolio | 박예찬</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,7 +25,9 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="portfolio.html">Portfolio</a>
+        <a href="search.html">Search</a>
         <a href="dashboard.html">Dashboard</a>
+        <a href="presentation.html">Pitch</a>
         <a href="contact.html">Contact</a>
       </nav>
       <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="테마 변경" title="테마 변경">
@@ -55,6 +63,26 @@
               <h2>프로젝트 대시보드</h2>
               <p>실습 완료율, 최근 방문, 즐겨찾기, 제출 체크리스트, 자기평가 퀴즈, 메모를 저장합니다.</p>
               <a href="dashboard.html">대시보드 열기</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-project-card data-tags="web extra">
+            <img src="assets/project-search.svg" alt="사이트 검색 기능 썸네일">
+            <div class="project-body">
+              <span class="tag-line">추가 기능 · Search</span>
+              <h2>사이트 검색</h2>
+              <p>키워드를 입력하면 관련 실습, 대시보드, 발표 모드, 연락 페이지를 즉시 찾습니다.</p>
+              <a href="search.html">검색 열기</a>
+            </div>
+          </article>
+
+          <article class="project-card reveal" data-project-card data-tags="web extra">
+            <img src="assets/project-pitch.svg" alt="발표 모드 썸네일">
+            <div class="project-body">
+              <span class="tag-line">추가 기능 · Pitch Mode</span>
+              <h2>발표 모드</h2>
+              <p>기말 프로젝트의 핵심 기능을 슬라이드 형식으로 설명하고 방향키로 넘길 수 있습니다.</p>
+              <a href="presentation.html">발표 모드</a>
             </div>
           </article>
 

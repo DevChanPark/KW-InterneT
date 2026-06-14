@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Pitch mode project</title>
+  <desc id="desc">A presentation slide with controls.</desc>
+  <rect width="640" height="360" fill="#f2f0ff"/>
+  <rect x="74" y="52" width="492" height="256" rx="20" fill="#1d2527"/>
+  <rect x="112" y="86" width="416" height="174" rx="14" fill="#fffaf1"/>
+  <rect x="146" y="122" width="218" height="24" rx="12" fill="#6b5bd2"/>
+  <rect x="146" y="174" width="336" height="18" rx="9" fill="#0f766e" opacity=".88"/>
+  <rect x="146" y="212" width="250" height="18" rx="9" fill="#d94f30" opacity=".86"/>
+  <circle cx="278" cy="282" r="8" fill="#fffaf1"/>
+  <circle cx="320" cy="282" r="8" fill="#d6a740"/>
+  <circle cx="362" cy="282" r="8" fill="#fffaf1"/>
+</svg>

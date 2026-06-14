@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Site search project</title>
+  <desc id="desc">A search interface with result cards.</desc>
+  <rect width="640" height="360" fill="#fffaf1"/>
+  <rect x="90" y="58" width="460" height="244" rx="20" fill="#ffffff" stroke="#d6c7aa" stroke-width="3"/>
+  <rect x="132" y="98" width="290" height="38" rx="19" fill="#edf7f3" stroke="#0f766e" stroke-width="3"/>
+  <circle cx="468" cy="116" r="30" fill="none" stroke="#0f766e" stroke-width="12"/>
+  <path d="m490 138 38 38" stroke="#0f766e" stroke-width="14" stroke-linecap="round"/>
+  <rect x="132" y="170" width="360" height="22" rx="11" fill="#d94f30" opacity=".9"/>
+  <rect x="132" y="214" width="310" height="18" rx="9" fill="#6b5bd2" opacity=".74"/>
+  <rect x="132" y="252" width="238" height="18" rx="9" fill="#d6a740" opacity=".9"/>
+</svg>

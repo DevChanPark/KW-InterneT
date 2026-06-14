@@ -9,10 +9,10 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://devchanpark.github.io/KW-InterneT/">
   <meta property="og:image" content="https://devchanpark.github.io/KW-InterneT/assets/profile-visual.svg">
-  <title>DOM 스타일 변환기 | 박예찬</title>
+  <title>Search | 박예찬</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body data-page="dom-style">
+<body data-page="search">
   <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
   <header class="site-header">
@@ -39,30 +39,33 @@
   <main>
     <section class="page-hero">
       <div class="shell narrow reveal">
-        <p class="eyebrow">13주차 실습 3 · DOM Object</p>
-        <h1>DOM 스타일 변환기</h1>
-        <p>버튼을 클릭하면 JavaScript가 DOM 객체를 찾아 글자색, 크기, 배경, 표시 상태를 즉시 바꿉니다.</p>
+        <p class="eyebrow">Site Search</p>
+        <h1>필요한 실습과 기능을 바로 찾습니다.</h1>
+        <p>D-Day, DOM, 피자, 자동차, 저장 기능처럼 키워드를 입력하면 관련 페이지를 즉시 보여줍니다.</p>
       </div>
     </section>
 
     <section class="section-band">
-      <div class="shell tool-grid">
+      <div class="shell search-layout site-search-widget">
         <article class="tool-panel reveal">
-          <h2>변경 대상 문장</h2>
-          <p id="target" class="style-target">이 문장의 스타일을 바꿔보세요!</p>
-          <p class="style-state" id="styleState">현재 상태: 기본 스타일</p>
+          <h2>사이트 검색</h2>
+          <label for="siteSearchInput">검색어</label>
+          <input id="siteSearchInput" type="search" data-site-search-input placeholder="예: DOM, 피자, 저장, 대시보드">
+          <div class="search-chip-row">
+            <button type="button" data-search-chip="DOM">DOM</button>
+            <button type="button" data-search-chip="이벤트">이벤트</button>
+            <button type="button" data-search-chip="저장">저장</button>
+            <button type="button" data-search-chip="발표">발표</button>
+          </div>
+          <p class="tool-result" data-site-search-count role="status"></p>
         </article>
 
         <article class="tool-panel reveal">
-          <h2>스타일 제어</h2>
-          <div class="control-grid">
-            <button class="button primary" type="button" onclick="changeColor()">글자색 변경</button>
-            <button class="button ghost" type="button" onclick="changeSize()">크게 보기</button>
-            <button class="button ghost" type="button" onclick="changeBackground()">배경 강조</button>
-            <button class="button ghost" type="button" onclick="toggleVisibility()">숨기기/보이기</button>
-            <button class="button ghost" type="button" onclick="resetDomStyle()">초기화</button>
+          <div class="panel-title">
+            <h2>검색 결과</h2>
+            <a class="text-button" href="portfolio.html">전체 보기</a>
           </div>
-          <p class="tool-result" id="domStyleResult" role="status"></p>
+          <div class="search-result-list" data-site-search-results></div>
         </article>
       </div>
     </section>
@@ -71,7 +74,7 @@
   <footer class="site-footer">
     <div class="shell footer-inner">
       <small>&copy; <span id="year"></span> 박예찬</small>
-      <a href="portfolio.html">Portfolio</a>
+      <a href="dashboard.html">Dashboard</a>
     </div>
   </footer>
 

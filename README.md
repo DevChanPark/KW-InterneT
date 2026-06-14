@@ -14,6 +14,9 @@
 - `event_order.html`: 실습 5, 스마트 피자 주문서
 - `event_car.html`: 실습 6, 키보드 자동차
 - `dashboard.html`: 기말 프로젝트 대시보드
+- `search.html`: 사이트 검색
+- `presentation.html`: 발표 모드
+- `404.html`: GitHub Pages 404 안내 페이지
 - `contact.html`: 연락 폼, 입력 검증, 초안 저장
 
 ## 추가 기능
@@ -32,4 +35,10 @@
 - 제출 체크리스트 저장
 - 자기평가 퀴즈와 점수 저장
 - 프로젝트 메모 자동 저장
+- 사이트 검색과 키워드 칩
+- 발표 모드 슬라이드와 방향키 조작
+- GitHub Pages용 커스텀 404 페이지
+- 실습 이전/다음 이동
+- 대시보드 데이터 JSON 내보내기
+- SEO/Open Graph 메타 태그
 - 연락 폼 글자 수 표시와 초안 저장

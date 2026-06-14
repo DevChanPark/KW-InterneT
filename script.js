@@ -87,8 +87,11 @@
     "index.html": "Home",
     "about.html": "About",
     "portfolio.html": "Portfolio",
+    "search.html": "Search",
     "dashboard.html": "Dashboard",
+    "presentation.html": "Pitch Mode",
     "contact.html": "Contact",
+    "404.html": "404",
     "dday.html": "D-Day Keeper",
     "random.html": "Random Picker",
     "dom_style.html": "DOM 스타일 변환기",
@@ -96,6 +99,100 @@
     "event_order.html": "스마트 피자 주문서",
     "event_car.html": "키보드 자동차"
   };
+
+  var sitePages = [
+    {
+      href: "index.html",
+      title: "Home",
+      category: "소개",
+      description: "박예찬 포트폴리오의 첫 화면과 주요 기능 요약입니다.",
+      keywords: "홈 소개 박예찬 광운대학교 포트폴리오 메인"
+    },
+    {
+      href: "portfolio.html",
+      title: "Portfolio",
+      category: "프로젝트",
+      description: "전체 실습 카드와 필터 기능을 확인합니다.",
+      keywords: "포트폴리오 프로젝트 필터 실습 모음"
+    },
+    {
+      href: "search.html",
+      title: "Site Search",
+      category: "추가 기능",
+      description: "키워드로 실습과 기능 페이지를 바로 찾습니다.",
+      keywords: "검색 search 키워드 찾기 추가 기능"
+    },
+    {
+      href: "dashboard.html",
+      title: "Final Dashboard",
+      category: "추가 기능",
+      description: "완료율, 즐겨찾기, 최근 방문, 체크리스트, 메모, 퀴즈를 저장합니다.",
+      keywords: "대시보드 dashboard 완료율 즐겨찾기 방문 기록 체크리스트 메모 퀴즈 저장 localStorage"
+    },
+    {
+      href: "presentation.html",
+      title: "Pitch Mode",
+      category: "발표",
+      description: "기말 프로젝트 발표용 슬라이드 모드입니다.",
+      keywords: "발표 슬라이드 pitch presentation 기말 프로젝트"
+    },
+    {
+      href: "dday.html",
+      title: "D-Day Keeper",
+      category: "실습 1",
+      description: "Date 객체로 목표 날짜까지 남은 일수를 계산하고 저장합니다.",
+      keywords: "D-Day 날짜 Date 계산 일정 저장"
+    },
+    {
+      href: "random.html",
+      title: "Random Picker",
+      category: "실습 2",
+      description: "String, Array, Math 객체를 사용해 랜덤 항목을 뽑습니다.",
+      keywords: "랜덤 random String Array Math 뽑기 기록"
+    },
+    {
+      href: "dom_style.html",
+      title: "DOM 스타일 변환기",
+      category: "실습 3",
+      description: "DOM 객체의 style 프로퍼티로 문장 디자인을 바꿉니다.",
+      keywords: "DOM style 스타일 글자색 크기 배경 숨기기"
+    },
+    {
+      href: "dom_list.html",
+      title: "댓글 추가/삭제",
+      category: "실습 4",
+      description: "createElement, appendChild, removeChild로 댓글 목록을 제어합니다.",
+      keywords: "DOM 댓글 createElement appendChild removeChild 추가 삭제"
+    },
+    {
+      href: "event_order.html",
+      title: "스마트 피자 주문서",
+      category: "실습 5",
+      description: "폼 이벤트로 피자 주문 금액과 영수증을 계산합니다.",
+      keywords: "이벤트 event 폼 피자 주문 총액 영수증 onchange submit"
+    },
+    {
+      href: "event_car.html",
+      title: "키보드 자동차",
+      category: "실습 6",
+      description: "keydown 이벤트와 방향키로 자동차를 움직입니다.",
+      keywords: "키보드 자동차 keydown 방향키 이벤트 경계 속도"
+    },
+    {
+      href: "contact.html",
+      title: "Contact Draft",
+      category: "연락",
+      description: "폼 검증, 글자 수 표시, 초안 저장을 확인합니다.",
+      keywords: "연락 contact form 폼 검증 초안 저장 이메일"
+    },
+    {
+      href: "404.html",
+      title: "404 안내 페이지",
+      category: "완성도",
+      description: "없는 주소로 접근했을 때 주요 페이지로 안내합니다.",
+      keywords: "404 오류 페이지 안내 GitHub Pages"
+    }
+  ];
 
   function formatTimeAgo(isoString) {
     if (!isoString) {
@@ -291,6 +388,159 @@
     });
   }
 
+  function normalizeSearchText(value) {
+    return String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
+  }
+
+  function filterSitePages(query) {
+    var normalized = normalizeSearchText(query);
+    if (!normalized) {
+      return sitePages.slice();
+    }
+    var terms = normalized.split(" ");
+    return sitePages.filter(function (item) {
+      var haystack = normalizeSearchText([
+        item.title,
+        item.category,
+        item.description,
+        item.keywords
+      ].join(" "));
+      return terms.every(function (term) {
+        return haystack.indexOf(term) !== -1;
+      });
+    });
+  }
+
+  function renderSearchResults(input, results, count, limit) {
+    var query = input.value;
+    var matches = filterSitePages(query);
+    var visible = matches.slice(0, limit || matches.length);
+    if (count) {
+      count.textContent = matches.length + "개 결과" + (query.trim() ? " · 검색어: " + query.trim() : "");
+    }
+    if (!visible.length) {
+      results.innerHTML = '<p class="empty-state">검색 결과가 없습니다. 다른 키워드를 입력해보세요.</p>';
+      return;
+    }
+    results.innerHTML = visible.map(function (item) {
+      return [
+        '<a class="search-result" href="' + item.href + '">',
+        '<span class="tag-line">' + escapeHTML(item.category) + "</span>",
+        "<strong>" + escapeHTML(item.title) + "</strong>",
+        "<small>" + escapeHTML(item.description) + "</small>",
+        "</a>"
+      ].join("");
+    }).join("");
+  }
+
+  function initSiteSearch() {
+    var widgets = $$(".site-search-widget");
+    if (!widgets.length) {
+      return;
+    }
+    widgets.forEach(function (widget) {
+      var input = $("[data-site-search-input]", widget);
+      var results = $("[data-site-search-results]", widget);
+      var count = $("[data-site-search-count]", widget);
+      if (!input || !results) {
+        return;
+      }
+      var params = new URLSearchParams(window.location.search);
+      if (document.body.dataset.page === "search" && params.get("q")) {
+        input.value = params.get("q");
+      }
+      var limit = results.classList.contains("compact") ? 4 : 20;
+      var run = function () {
+        renderSearchResults(input, results, count, limit);
+      };
+      input.addEventListener("input", run);
+      $$("[data-search-chip]", widget).forEach(function (button) {
+        button.addEventListener("click", function () {
+          input.value = button.dataset.searchChip || "";
+          run();
+          input.focus();
+        });
+      });
+      run();
+    });
+  }
+
+  function initPracticePager() {
+    var page = document.body.dataset.page;
+    var index = practicePages.findIndex(function (item) {
+      return item.id === page;
+    });
+    var footer = $(".site-footer");
+    if (index === -1 || !footer) {
+      return;
+    }
+    var prev = practicePages[(index - 1 + practicePages.length) % practicePages.length];
+    var next = practicePages[(index + 1) % practicePages.length];
+    var section = document.createElement("section");
+    section.className = "section-band compact";
+    section.innerHTML = [
+      '<div class="shell practice-pager">',
+      '<a class="pager-link" href="' + prev.href + '"><span>이전 실습</span><strong>' + escapeHTML(prev.title) + "</strong></a>",
+      '<a class="pager-link center" href="dashboard.html"><span>진행률 보기</span><strong>Dashboard</strong></a>',
+      '<a class="pager-link" href="' + next.href + '"><span>다음 실습</span><strong>' + escapeHTML(next.title) + "</strong></a>",
+      "</div>"
+    ].join("");
+    footer.parentNode.insertBefore(section, footer);
+  }
+
+  function initPresentation() {
+    var deck = $("#presentationMode");
+    if (!deck) {
+      return;
+    }
+    var slides = $$("[data-slide]", deck);
+    var dots = $("#slideDots");
+    var counter = $("#slideCounter");
+    var prev = $("#prevSlide");
+    var next = $("#nextSlide");
+    var key = "yechan-presentation-slide";
+    var activeIndex = Math.min(Number(storage.get(key, 0)) || 0, slides.length - 1);
+
+    function renderSlide() {
+      slides.forEach(function (slide, index) {
+        slide.classList.toggle("is-active", index === activeIndex);
+      });
+      counter.textContent = (activeIndex + 1) + " / " + slides.length;
+      dots.innerHTML = slides.map(function (_, index) {
+        return '<button type="button" class="' + (index === activeIndex ? "is-active" : "") + '" data-slide-dot="' + index + '" aria-label="' + (index + 1) + '번 슬라이드"></button>';
+      }).join("");
+      storage.set(key, activeIndex);
+    }
+
+    function moveSlide(delta) {
+      activeIndex = (activeIndex + delta + slides.length) % slides.length;
+      renderSlide();
+    }
+
+    prev.addEventListener("click", function () {
+      moveSlide(-1);
+    });
+    next.addEventListener("click", function () {
+      moveSlide(1);
+    });
+    dots.addEventListener("click", function (event) {
+      if (!event.target.matches("[data-slide-dot]")) {
+        return;
+      }
+      activeIndex = Number(event.target.dataset.slideDot);
+      renderSlide();
+    });
+    window.addEventListener("keydown", function (event) {
+      if (event.key === "ArrowLeft") {
+        moveSlide(-1);
+      }
+      if (event.key === "ArrowRight") {
+        moveSlide(1);
+      }
+    });
+    renderSlide();
+  }
+
   function initDday() {
     var form = $("#ddayForm");
     if (!form) {
@@ -406,6 +656,8 @@
     var recentList = $("#recentList");
     var checklistBox = $("#submitChecklist");
     var checklistStatus = $("#checklistStatus");
+    var exportButton = $("#dashboardExport");
+    var exportStatus = $("#dashboardExportStatus");
     var memo = $("#dashboardMemo");
     var memoCount = $("#memoCount");
     var quizForm = $("#quizForm");
@@ -563,6 +815,28 @@
       updateMemoCount();
       quizResult.textContent = "";
       renderAll();
+    });
+
+    exportButton.addEventListener("click", function () {
+      var exportData = {
+        exportedAt: new Date().toISOString(),
+        done: storage.get(doneKey, {}),
+        favorites: storage.get(favoriteKey, {}),
+        checklist: storage.get(checklistKey, {}),
+        memo: storage.get(memoKey, ""),
+        quiz: storage.get(quizKey, null),
+        visits: storage.get("yechan-page-visits", {})
+      };
+      var blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+      var link = document.createElement("a");
+      link.href = url;
+      link.download = "yechan-dashboard-data.json";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      exportStatus.textContent = "대시보드 데이터를 JSON 파일로 내보냈습니다.";
     });
 
     checklistBox.addEventListener("change", function (event) {
@@ -1163,6 +1437,9 @@
   initProjectFilter();
   initDday();
   initDashboard();
+  initSiteSearch();
+  initPracticePager();
+  initPresentation();
   initRandomPicker();
   initDomStyle();
   initDomList();
